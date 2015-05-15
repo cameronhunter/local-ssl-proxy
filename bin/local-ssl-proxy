@@ -6,9 +6,22 @@ var proxy = require('http-proxy');
 var optimist = require('optimist');
 
 var commandline = optimist.
-                    usage('Usage: $0 --source [port] --target [port]').
-                    alias({'s':'source', 't':'target', 'h':'help'}).
-                    default({s: 9001, t: 9000});
+                    usage('Usage: $0 --hostname [host] --source [port] --target [port]').
+                    alias({
+                      n: 'hostname',
+                      s: 'source',
+                      t: 'target',
+                      c: 'cert',
+                      k: 'key',
+                      h: 'help'
+                    }).
+                    default({
+                      n: 'localhost',
+                      s: 9001,
+                      t: 9000,
+                      c: path.join(__dirname, '..', 'resources', 'localhost.cert'),
+                      k: path.join(__dirname, '..', 'resources', 'localhost.key')
+                    });
 
 var args = commandline.argv;
 
@@ -17,9 +30,9 @@ if (args.h) {
   return;
 }
 
-var key = fs.readFileSync(path.join(__dirname, '..', 'resources', 'localhost.key'), 'utf8'); 
-var cert = fs.readFileSync(path.join(__dirname, '..', 'resources', 'localhost.cert'), 'utf8');
+var key = fs.readFileSync(args.key, 'utf8');
+var cert = fs.readFileSync(args.cert, 'utf8');
 
-proxy.createServer(args.target, 'localhost', { https: { key: key, cert: cert } }).listen(args.source);
+proxy.createServer(args.target, args.hostname, { https: { key: key, cert: cert } }).listen(args.source);
 
-console.info('Proxying requests from https://localhost:' + args.source, '→ http://localhost:' + args.target);
+console.info('Proxying requests from https://' + args.hostname + ':' + args.source, '→ http://' + args.hostname + ':' + args.target);
