@@ -28,12 +28,12 @@ Example config:
 ```json
 {
   "My proxy": {
-    source: 3001,
-    target: 3000
+    "source": 3001,
+    "target": 3000
   },
   "Another proxy": {
-    source: 9999,
-    target: 9000
+    "source": 9999,
+    "target": 9000
   }
 }
 ```
