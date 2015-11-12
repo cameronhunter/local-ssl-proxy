@@ -1,26 +1,28 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var path = require('path');
-var proxy = require('http-proxy');
-var yargs = require('yargs');
-var package = require(path.join(__dirname, '..', 'package.json'));
+var fs = require("fs");
+var path = require("path");
+var proxy = require("http-proxy");
+var yargs = require("yargs");
+var chalk = require("chalk");
+var package = require(path.join(__dirname, "..", "package.json"));
 
 var commandline = yargs.
-                    usage('Usage: $0 --hostname [host] --source [port] --target [port]').
+                    usage("Usage: $0 --hostname [host] --source [port] --target [port]").
                     alias({
-                      c: 'cert',
-                      h: 'help',
-                      k: 'key',
-                      n: 'hostname',
-                      s: 'source',
-                      t: 'target',
-                      v: 'version'
+                      c: "cert",
+                      h: "help",
+                      k: "key",
+                      n: "hostname",
+                      o: "config",
+                      s: "source",
+                      t: "target",
+                      v: "version"
                     }).
                     default({
-                      c: path.join(__dirname, '..', 'resources', 'localhost.cert'),
-                      k: path.join(__dirname, '..', 'resources', 'localhost.key'),
-                      n: 'localhost',
+                      c: path.join(__dirname, "..", "resources", "localhost.cert"),
+                      k: path.join(__dirname, "..", "resources", "localhost.key"),
+                      n: "localhost",
                       s: 9001,
                       t: 9000
                     });
@@ -37,17 +39,34 @@ if (args.v) {
   return;
 }
 
-proxy.createServer({
-  xfwd: true,
-  ws: true,
-  target: {
-    host: args.hostname,
-    port: args.target
-  },
-  ssl: {
-    key: fs.readFileSync(args.key, 'utf8'),
-    cert: fs.readFileSync(args.cert, 'utf8')
-  }
-}).listen(args.source);
+function createProxy(hostname, target, key, cert) {
+  return proxy.createServer({
+    xfwd: true,
+    ws: true,
+    target: {
+      host: hostname,
+      port: target
+    },
+    ssl: {
+      key: fs.readFileSync(key, "utf8"),
+      cert: fs.readFileSync(cert, "utf8")
+    }
+  });
+}
 
-console.info('Proxying requests from https://' + args.hostname + ':' + args.source, '→ http://' + args.hostname + ':' + args.target);
+var config = args.o ? require(args.o) : { proxy: args };
+
+Object.keys(config).forEach(function(name) {
+  var proxy = config[name];
+  var hostname = proxy.hostname || args.hostname;
+  var target = proxy.target || args.target;
+  var key = proxy.key || args.key;
+  var cert = proxy.cert || args.cert;
+  var source = proxy.source || args.source;
+
+  createProxy(hostname, target, key, cert).on("error", function(e) {
+    console.error(chalk.red("Request failed to " + name + ": " + chalk.bold(e.code)));
+  }).listen(source);
+
+  console.log(chalk.green("Started " + chalk.bold(name) + ": https://" + hostname + ":" + source, "→ http://" + hostname + ":" + target));
+});
