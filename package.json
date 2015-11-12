@@ -1,6 +1,6 @@
 {
   "name": "local-ssl-proxy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "description": "Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.",
   "repository": {

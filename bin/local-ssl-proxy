@@ -39,21 +39,6 @@ if (args.v) {
   return;
 }
 
-function createProxy(hostname, target, key, cert) {
-  return proxy.createServer({
-    xfwd: true,
-    ws: true,
-    target: {
-      host: hostname,
-      port: target
-    },
-    ssl: {
-      key: fs.readFileSync(key, "utf8"),
-      cert: fs.readFileSync(cert, "utf8")
-    }
-  });
-}
-
 var config = args.o ? require(args.o) : { proxy: args };
 
 Object.keys(config).forEach(function(name) {
@@ -64,7 +49,18 @@ Object.keys(config).forEach(function(name) {
   var cert = proxy.cert || args.cert;
   var source = proxy.source || args.source;
 
-  createProxy(hostname, target, key, cert).on("error", function(e) {
+  proxy.createServer({
+    xfwd: true,
+    ws: true,
+    target: {
+      host: hostname,
+      port: target
+    },
+    ssl: {
+      key: fs.readFileSync(key, "utf8"),
+      cert: fs.readFileSync(cert, "utf8")
+    }
+  }).on("error", function(e) {
     console.error(chalk.red("Request failed to " + name + ": " + chalk.bold(e.code)));
   }).listen(source);
 
