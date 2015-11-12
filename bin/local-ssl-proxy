@@ -42,12 +42,12 @@ if (args.v) {
 var config = args.o ? require(args.o) : { proxy: args };
 
 Object.keys(config).forEach(function(name) {
-  var proxy = config[name];
-  var hostname = proxy.hostname || args.hostname;
-  var target = proxy.target || args.target;
-  var key = proxy.key || args.key;
-  var cert = proxy.cert || args.cert;
-  var source = proxy.source || args.source;
+  var options = config[name];
+  var hostname = options.hostname || args.hostname;
+  var target = options.target || args.target;
+  var key = options.key || args.key;
+  var cert = options.cert || args.cert;
+  var source = options.source || args.source;
 
   proxy.createServer({
     xfwd: true,
