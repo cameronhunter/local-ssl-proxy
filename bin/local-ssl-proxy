@@ -4,23 +4,25 @@ var fs = require('fs');
 var path = require('path');
 var proxy = require('http-proxy');
 var optimist = require('optimist');
+var package = require(path.join(__dirname, '..', 'package.json'));
 
 var commandline = optimist.
                     usage('Usage: $0 --hostname [host] --source [port] --target [port]').
                     alias({
+                      c: 'cert',
+                      h: 'help',
+                      k: 'key',
                       n: 'hostname',
                       s: 'source',
                       t: 'target',
-                      c: 'cert',
-                      k: 'key',
-                      h: 'help'
+                      v: 'version'
                     }).
                     default({
+                      c: path.join(__dirname, '..', 'resources', 'localhost.cert'),
+                      k: path.join(__dirname, '..', 'resources', 'localhost.key'),
                       n: 'localhost',
                       s: 9001,
-                      t: 9000,
-                      c: path.join(__dirname, '..', 'resources', 'localhost.cert'),
-                      k: path.join(__dirname, '..', 'resources', 'localhost.key')
+                      t: 9000
                     });
 
 var args = commandline.argv;
@@ -30,9 +32,21 @@ if (args.h) {
   return;
 }
 
-var key = fs.readFileSync(args.key, 'utf8');
-var cert = fs.readFileSync(args.cert, 'utf8');
+if (args.v) {
+  console.error(package.name, ("v" + package.version));
+  return;
+}
 
-proxy.createServer(args.target, args.hostname, { https: { key: key, cert: cert } }).listen(args.source);
+proxy.createServer({
+  xfwd: true,
+  target: {
+    host: args.hostname,
+    port: args.target
+  },
+  ssl: {
+    key: fs.readFileSync(args.key, 'utf8'),
+    cert: fs.readFileSync(args.cert, 'utf8')
+  }
+}).listen(args.source);
 
 console.info('Proxying requests from https://' + args.hostname + ':' + args.source, '→ http://' + args.hostname + ':' + args.target);
