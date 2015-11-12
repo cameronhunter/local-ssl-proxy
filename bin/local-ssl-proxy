@@ -39,6 +39,7 @@ if (args.v) {
 
 proxy.createServer({
   xfwd: true,
+  ws: true,
   target: {
     host: args.hostname,
     port: args.target
