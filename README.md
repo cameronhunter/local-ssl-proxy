@@ -1,6 +1,8 @@
 local-ssl-proxy
 ===============
 
+[![Build Status](https://travis-ci.org/cameronhunter/local-ssl-proxy.svg?branch=master)](https://travis-ci.org/cameronhunter/local-ssl-proxy) [![NPM Version](https://img.shields.io/npm/v/local-ssl-proxy.svg)](https://npmjs.org/package/local-ssl-proxy) [![License](https://img.shields.io/npm/l/local-ssl-proxy.svg)](https://github.com/cameronhunter/local-ssl-proxy/blob/master/LICENSE.md)
+
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.
 
 Install
