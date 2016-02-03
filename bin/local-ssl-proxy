@@ -1,45 +1,13 @@
 #!/usr/bin/env node
 
 var fs = require("fs");
-var path = require("path");
 var proxy = require("http-proxy");
-var yargs = require("yargs");
 var chalk = require("chalk");
-var package = require(path.join(__dirname, "..", "package.json"));
+var commandline = require("../dist/commandline");
 
-var commandline = yargs.
-                    usage("Usage: $0 --hostname [host] --source [port] --target [port]").
-                    alias({
-                      c: "cert",
-                      h: "help",
-                      k: "key",
-                      n: "hostname",
-                      o: "config",
-                      s: "source",
-                      t: "target",
-                      v: "version"
-                    }).
-                    default({
-                      c: path.join(__dirname, "..", "resources", "localhost.cert"),
-                      k: path.join(__dirname, "..", "resources", "localhost.key"),
-                      n: "localhost",
-                      s: 9001,
-                      t: 9000
-                    });
+var args = commandline.parse();
 
-var args = commandline.argv;
-
-if (args.h) {
-  console.error(commandline.help());
-  return;
-}
-
-if (args.v) {
-  console.error(package.name, ("v" + package.version));
-  return;
-}
-
-var config = args.o ? require(args.o) : { proxy: args };
+var config = args.config || { proxy: args };
 
 Object.keys(config).forEach(function(name) {
   var options = config[name];
