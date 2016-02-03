@@ -1,7 +1,7 @@
 import nomnom from 'nomnom';
 import Path from 'path';
 import fs from 'fs';
-import Package from '../package.json';
+import { name, version } from '../package.json';
 
 const exists = path => fs.accessSync(absolutePath(path));
 const absolutePath = path => Path.isAbsolute(path) ? path : Path.resolve(process.cwd(), path);
@@ -37,8 +37,8 @@ const options = {
   version: {
     abbr: 'v',
     flag: true,
-    callback: () => Package.version
+    callback: () => version
   }
 };
 
-export default nomnom.script(Package.name).options(options);
+export default nomnom.script(name).options(options);
