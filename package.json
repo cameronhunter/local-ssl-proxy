@@ -11,9 +11,28 @@
   "bin": {
     "local-ssl-proxy": "bin/local-ssl-proxy"
   },
+  "files": [
+    "bin",
+    "dist",
+    "resources"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "pretest": "npm run build",
+    "test": "ava",
+    "prepublish": "npm run test"
+  },
   "dependencies": {
     "chalk": "^1.1.1",
     "http-proxy": "^1.13.1",
-    "yargs": "^3.32.0"
+    "nomnom": "^1.8.1"
+  },
+  "devDependencies": {
+    "ava": "^0.11.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-stage-1": "^6.3.13",
+    "rollup": "^0.25.2",
+    "rollup-plugin-babel": "^2.3.9",
+    "rollup-plugin-json": "^2.0.0"
   }
 }
