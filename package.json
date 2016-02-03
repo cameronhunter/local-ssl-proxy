@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "chalk": "^1.1.1",
-    "http-proxy": "^1.12.0",
+    "http-proxy": "^1.13.1",
     "yargs": "^3.32.0"
   }
 }
