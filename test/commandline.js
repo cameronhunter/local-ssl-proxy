@@ -4,22 +4,22 @@ import commandline from '../dist/commandline';
 
 test('cert (default)', t => {
   const { cert } = commandline.parse([]);
-  t.ok(cert);
+  t.truthy(cert);
 });
 
 test('cert', t => {
   const { cert } = commandline.parse(['--cert', '../resources/localhost.cert']);
-  t.ok(cert);
+  t.truthy(cert);
 });
 
 test('key (default)', t => {
   const { key } = commandline.parse([]);
-  t.ok(key);
+  t.truthy(key);
 });
 
 test('key', t => {
   const { key } = commandline.parse(['--key', '../resources/localhost.key']);
-  t.ok(key);
+  t.truthy(key);
 });
 
 test('hostname (default)', t => {
@@ -54,5 +54,5 @@ test('target', t => {
 
 test('config', t => {
   const { config } = commandline.parse(['--config', './test-config.json']);
-  t.ok(config);
+  t.truthy(config);
 });
