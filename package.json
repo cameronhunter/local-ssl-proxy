@@ -28,7 +28,7 @@
     "nomnom": "^1.8.1"
   },
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "babel-preset-es2015-rollup": "^1.1.1",
     "babel-preset-stage-1": "^6.5.0",
     "rollup": "^0.33.0",
