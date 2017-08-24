@@ -33,6 +33,6 @@
     "babel-preset-stage-1": "^6.16.0",
     "rollup": "^0.36.1",
     "rollup-plugin-babel": "^2.4.0",
-    "rollup-plugin-json": "^2.0.2"
+    "rollup-plugin-json": "^2.1.1"
   }
 }
