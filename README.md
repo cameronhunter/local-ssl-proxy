@@ -44,3 +44,17 @@ And run the proxy with the configuration file:
 ```sh
 local-ssl-proxy --config config.json
 ```
+
+
+## Run ssl proxy with self-signed trusted certificate
+
+You can use it to host any domain, just change localhost to anything you like, wildcards are also supported. 
+
+1. Install [mkcert](https://github.com/FiloSottile/mkcert) (`choco install mkcert` / `brew install mkcert`)
+1. Run `mkcert -install`
+1. Run `mkcert localhost`
+1. Run 
+```
+local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 9001 --target 9000
+```
+1. You're all set! Just go to https://localhost:9001 and see your project working!
