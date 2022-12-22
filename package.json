@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "chalk": "^1.1.3",
-    "http-proxy": "^1.15.1",
-    "nomnom": "^1.8.1"
+    "commander": "^9.4.1",
+    "http-proxy": "^1.15.1"
   },
   "devDependencies": {
     "ava": "^0.16.0",
