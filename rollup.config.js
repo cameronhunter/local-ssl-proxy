@@ -1,12 +1,16 @@
-import babel from 'rollup-plugin-babel';
-import json from 'rollup-plugin-json';
+import { babel } from "@rollup/plugin-babel";
+import json from "@rollup/plugin-json";
 
-export default {
-  entry: 'src/commandline.js',
-  dest: 'dist/commandline.js',
-  format: 'cjs',
-  plugins: [
-    json(),
-    babel()
-  ]
+/** @type {import('rollup').RollupOptions} */
+const config = {
+  input: "src/commandline.js",
+  output: {
+    file: "dist/commandline.js",
+    format: "cjs",
+    interop: "auto"
+  },
+  plugins: [babel({ babelHelpers: "bundled" }), json()],
+  external: ["commander", "fs", "path", "process"]
 };
+
+export default config;
