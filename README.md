@@ -4,13 +4,24 @@
 
 Simple SSL HTTP proxy using a self-signed certificate. Intended for local development only.
 
-## Install
+## Quick Start
+
+The package supports immediate use via [`npx`](https://docs.npmjs.com/cli/v7/commands/npx) or you can install it
+globally.
+
+Use via `npx`:
+
+```sh
+npx local-ssl-proxy
+```
+
+Install globally:
 
 ```sh
 npm install -g local-ssl-proxy
 ```
 
-## Run
+## Usage
 
 To start a proxy from port `9001` to `9000` run:
 
