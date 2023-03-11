@@ -17,7 +17,7 @@
     "start": "ts-node ./src/main.ts",
     "build": "tsc",
     "test": "jest",
-    "prepublish": "yarn run test"
+    "prepublish": "yarn test && yarn build"
   },
   "dependencies": {
     "ansi-colors": "^4.1.3",
