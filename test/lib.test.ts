@@ -6,7 +6,7 @@ test('cert (default)', () => {
 });
 
 test('cert', () => {
-  const { cert } = parse(['--cert', require.resolve('../resources/localhost.crt')]);
+  const { cert } = parse(['--cert', require.resolve('../resources/localhost.pem')]);
   expect(cert).toEqual(expect.any(String));
 });
 
@@ -16,7 +16,7 @@ test('key (default)', () => {
 });
 
 test('key', () => {
-  const { key } = parse(['--key', require.resolve('../resources/localhost.key')]);
+  const { key } = parse(['--key', require.resolve('../resources/localhost-key.pem')]);
   expect(key).toEqual(expect.any(String));
 });
 

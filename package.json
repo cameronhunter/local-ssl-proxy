@@ -17,7 +17,8 @@
     "start": "ts-node ./src/main.ts",
     "build": "tsc && chmod +x ./build/main.js",
     "test": "jest",
-    "prepublish": "yarn test && yarn build"
+    "prepublish": "yarn test && yarn build",
+    "renew-certs": "cd resources && mkcert localhost"
   },
   "dependencies": {
     "ansi-colors": "^4.1.3",

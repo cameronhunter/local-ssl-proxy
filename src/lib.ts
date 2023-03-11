@@ -21,9 +21,9 @@ const program = createCommand(name)
     '-c, --cert <cert>',
     'path to SSL certificate',
     exists,
-    resolve(__dirname, '..', 'resources', 'localhost.crt')
+    resolve(__dirname, '..', 'resources', 'localhost.pem')
   )
-  .option('-k, --key <key>', 'path to SSL key', exists, resolve(__dirname, '..', 'resources', 'localhost.key'))
+  .option('-k, --key <key>', 'path to SSL key', exists, resolve(__dirname, '..', 'resources', 'localhost-key.pem'))
   .option('-o, --config <config>', 'path to configuration file', (path) => require(absolutePath(path)));
 
 type Proxy = {
