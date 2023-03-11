@@ -1,5 +1,4 @@
 import test from 'ava';
-import fs from 'fs';
 import commandline from '../dist/commandline';
 
 test('cert (default)', t => {
@@ -8,7 +7,7 @@ test('cert (default)', t => {
 });
 
 test('cert', t => {
-  const { cert } = commandline.parse(['--cert', '../resources/localhost.cert']);
+  const { cert } = commandline.parse(['--cert', '../resources/localhost.crt']);
   t.truthy(cert);
 });
 

@@ -20,7 +20,7 @@ const program = commander
     "-c, --cert <cert>",
     "path to SSL certificate",
     exists,
-    Path.resolve(__dirname, "..", "resources", "localhost.cert")
+    Path.resolve(__dirname, "..", "resources", "localhost.crt")
   )
   .option("-k, --key <key>", "path to SSL key", exists, Path.resolve(__dirname, "..", "resources", "localhost.key"))
   .option("-o, --config <config>", "path to configuration file", (path) => require(absolutePath(path)));
