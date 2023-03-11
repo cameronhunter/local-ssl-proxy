@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { access, constants } from 'node:fs/promises';

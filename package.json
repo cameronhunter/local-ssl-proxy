@@ -15,11 +15,11 @@
     "resources"
   ],
   "scripts": {
-    "start": "ts-node ./src/main.ts",
+    "start": "npx ts-node ./src/main.ts",
     "prebuild": "yarn clean",
     "build": "tsc && chmod +x ./build/main.js",
     "clean": "tsc --build --clean",
-    "test": "jest",
+    "test": "vitest run",
     "prepublish": "yarn test && yarn build",
     "renew-certs": "cd resources && mkcert localhost"
   },
@@ -31,16 +31,9 @@
   "devDependencies": {
     "@tsconfig/node-lts-strictest": "^18.12.1",
     "@types/http-proxy": "^1.17.10",
-    "@types/jest": "^29.4.0",
     "@types/node": "^18.15.0",
-    "jest": "^29.5.0",
-    "ts-jest": "^29.0.5",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vitest": "^0.29.2"
   },
-  "packageManager": "yarn@3.4.1",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  }
+  "packageManager": "yarn@3.4.1"
 }
