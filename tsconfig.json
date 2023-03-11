@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node-lts-strictest/tsconfig.json",
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "declaration": true
+  }
+}
