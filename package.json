@@ -8,7 +8,7 @@
     "url": "http://github.com/cameronhunter/local-ssl-proxy.git"
   },
   "license": "MIT",
-  "bin": "dist/main.js",
+  "bin": "build/main.js",
   "preferGlobal": true,
   "files": [
     "build",
