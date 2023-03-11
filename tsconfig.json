@@ -5,7 +5,7 @@
   ],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "build",
     "resolveJsonModule": true,
     "declaration": true
   }

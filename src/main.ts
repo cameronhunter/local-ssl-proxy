@@ -31,6 +31,8 @@ for (const name of Object.keys(config)) {
     .listen(source);
 
   console.log(
-    green('Started ' + bold(name) + ': https://' + hostname + ':' + source + ' → http://' + hostname + ':' + target)
+    green(
+      `Started ${isProxy(parsed) ? 'proxy' : bold(name)}: https://${hostname}:${source} → http://${hostname}:${target}`
+    )
   );
 }
