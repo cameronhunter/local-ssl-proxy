@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "bin": {
-    "local-ssl-proxy": "build/main.js",
-  }
+    "local-ssl-proxy": "build/main.js"
+  },
   "preferGlobal": true,
   "files": [
     "build",
