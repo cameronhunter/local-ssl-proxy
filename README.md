@@ -43,11 +43,17 @@ Example config:
 {
   "My proxy": {
     "source": 3001,
-    "target": 3000
+    "target": 3000,
+    "key": "localhost-key.pem",
+    "cert": "localhost.pem",
+    "hostname": "localhost"
   },
   "Another proxy": {
     "source": 9999,
-    "target": 9000
+    "target": 9000,
+    "key": "localhost-key.pem",
+    "cert": "localhost.pem",
+    "hostname": "localhost"
   }
 }
 ```
